@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800,900&display=swap&subset=cyrillic');
+
+body, ul, li, p, h1, h2, h3, h4, h5, h6, a, span {margin: 0; padding: 0;}
+figure img {width: 100%;}
+ul, li {list-style-type: none;}
+a, a:hover, a:active, a:focus {text-decoration: none; color: #000;}
+a {
+	-webkit-transition: .2s linear;
+    -o-transition: .2s linear;
+    -moz-transition: .2s linear;
+    transition: .2s linear;
+}
+
+input {outline: none;}
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	position: fixed;
+	width: 100%;
+}

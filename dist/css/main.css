@@ -1,0 +1,446 @@
+.root {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  cursor: default; }
+
+.map {
+  position: relative;
+  height: 1000px;
+  width: 1000px;
+  border: 1px solid black;
+  background-image: url(../images/bg.png); }
+
+.entity {
+  position: absolute;
+  z-index: 1; }
+
+.entity-inner {
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  border-radius: 50%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .entity-inner:before {
+    width: 0;
+    height: 0;
+    content: '';
+    border: 5px solid transparent;
+    margin-top: -8px; }
+
+.character {
+  width: 50px;
+  height: 50px; }
+  .character.alive .entity-inner {
+    background-color: orange; }
+    .character.alive .entity-inner:before {
+      border-bottom-color: orange; }
+  .character.dead .entity-inner {
+    background-color: grey; }
+    .character.dead .entity-inner:before {
+      border-bottom-color: grey; }
+
+.monster {
+  width: 20px;
+  height: 20px; }
+
+.monster.alive .entity-inner {
+  background-color: red; }
+
+.monster.dead .entity-inner {
+  background-color: grey; }
+
+.monster.alive .entity-inner:before {
+  border-bottom-color: red; }
+
+.monster.dead .entity-inner:before {
+  border-bottom-color: grey; }
+
+.indicator {
+  position: absolute;
+  margin-left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  height: 2px;
+  top: -8px;
+  width: 100%; }
+
+.identify {
+  position: absolute;
+  width: 200%;
+  top: -20px;
+  text-align: center;
+  margin-left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  height: 10px;
+  line-height: 10px;
+  font-size: 10px; }
+
+@-webkit-keyframes animation-damage {
+  from {
+    top: -30px;
+    opacity: 1; }
+  50% {
+    top: -40px;
+    opacity: 0; }
+  to {
+    top: -40px;
+    opacity: 0; } }
+
+@keyframes animation-damage {
+  from {
+    top: -30px;
+    opacity: 1; }
+  50% {
+    top: -40px;
+    opacity: 0; }
+  to {
+    top: -40px;
+    opacity: 0; } }
+
+.animation-damage {
+  position: absolute;
+  -webkit-animation: animation-damage 800ms 1;
+          animation: animation-damage 800ms 1;
+  left: 20px; }
+
+@-webkit-keyframes animation-click {
+  from {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0); }
+  30% {
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    -webkit-transform: translateX(-3px) translateY(-3px);
+            transform: translateX(-3px) translateY(-3px); }
+  to {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    -webkit-transform: translateX(5px) translateY(5px);
+            transform: translateX(5px) translateY(5px); } }
+
+@keyframes animation-click {
+  from {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0); }
+  30% {
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    -webkit-transform: translateX(-3px) translateY(-3px);
+            transform: translateX(-3px) translateY(-3px); }
+  to {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    -webkit-transform: translateX(5px) translateY(5px);
+            transform: translateX(5px) translateY(5px); } }
+
+.animation-click {
+  position: absolute;
+  border-radius: 50%;
+  background: -o-radial-gradient(orange, white);
+  background: radial-gradient(orange, white);
+  -webkit-animation: animation-click 300ms 1;
+          animation: animation-click 300ms 1; }
+
+@-webkit-keyframes animation-attack {
+  from {
+    top: 0;
+    opacity: 0; }
+  50% {
+    top: -10px;
+    opacity: 1; }
+  to {
+    top: -20px;
+    opacity: 0; } }
+
+@keyframes animation-attack {
+  from {
+    top: 0;
+    opacity: 0; }
+  50% {
+    top: -10px;
+    opacity: 1; }
+  to {
+    top: -20px;
+    opacity: 0; } }
+
+.animation-attack {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(10%, red), color-stop(40%, transparent));
+  background: -o-linear-gradient(top, red 10%, transparent 40%);
+  background: linear-gradient(to bottom, red 10%, transparent 40%);
+  border-top: 2px solid red;
+  border-radius: 50%;
+  -webkit-animation: animation-attack 200ms 1;
+          animation: animation-attack 200ms 1;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear; }
+
+.target-panel {
+  text-align: center;
+  position: absolute;
+  top: 10px;
+  width: 180px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid red;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 40px 140px;
+  grid-template-rows: 20px 20px; }
+
+.target-panel-lvl {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  font-size: 20px;
+  line-height: 40px;
+  border-right: 1px solid grey; }
+
+.target-panel-name {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  line-height: 20px; }
+
+.target-panel-hp {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding: 0 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.target-panel-hp div {
+  width: 100%;
+  height: 5px; }
+
+.equipment {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-position: center;
+  background-size: 100%;
+  cursor: pointer;
+  z-index: 10; }
+
+.pickelhaube-grey {
+  background-image: url(../images/pickelhaube-grey.png); }
+
+.pickelhaube-olive {
+  background-image: url(../images/pickelhaube-olive.png); }
+
+.pickelhaube-orange {
+  background-image: url(../images/pickelhaube-orange.png); }
+
+.pickelhaube-red {
+  background-image: url(../images/pickelhaube-red.png); }
+
+.gladius-grey {
+  background-image: url(../images/gladius-grey.png); }
+
+.gladius-olive {
+  background-image: url(../images/gladius-olive.png); }
+
+.gladius-orange {
+  background-image: url(../images/gladius-orange.png); }
+
+.gladius-red {
+  background-image: url(../images/gladius-red.png); }
+
+.round-shield-grey {
+  background-image: url(../images/round-shield-grey.png); }
+
+.round-shield-olive {
+  background-image: url(../images/round-shield-olive.png); }
+
+.round-shield-orange {
+  background-image: url(../images/round-shield-orange.png); }
+
+.round-shield-red {
+  background-image: url(../images/round-shield-red.png); }
+
+.chest-armor-grey {
+  background-image: url(../images/chest-armor-grey.png); }
+
+.chest-armor-olive {
+  background-image: url(../images/chest-armor-olive.png); }
+
+.chest-armor-orange {
+  background-image: url(../images/chest-armor-orange.png); }
+
+.chest-armor-red {
+  background-image: url(../images/chest-armor-red.png); }
+
+.leg-armor-grey {
+  background-image: url(../images/leg-armor-grey.png); }
+
+.leg-armor-olive {
+  background-image: url(../images/leg-armor-olive.png); }
+
+.leg-armor-orange {
+  background-image: url(../images/leg-armor-orange.png); }
+
+.leg-armor-red {
+  background-image: url(../images/leg-armor-red.png); }
+
+.steeltoe-boots-grey {
+  background-image: url(../images/steeltoe-boots-grey.png); }
+
+.steeltoe-boots-olive {
+  background-image: url(../images/steeltoe-boots-olive.png); }
+
+.steeltoe-boots-orange {
+  background-image: url(../images/steeltoe-boots-orange.png); }
+
+.steeltoe-boots-red {
+  background-image: url(../images/steeltoe-boots-red.png); }
+
+.inside {
+  position: unset;
+  left: unset;
+  top: unset; }
+
+.inventary {
+  position: absolute;
+  bottom: 100px;
+  left: 80px;
+  border: 1px solid grey;
+  z-index: 100;
+  background-color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.visible {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.invisible {
+  display: none; }
+
+.inventary-active {
+  display: grid;
+  grid-template-rows: repeat(4, 50px);
+  grid-template-columns: repeat(3, 50px);
+  margin: 0 auto;
+  padding: 15px; }
+
+.inventary-active-cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid grey;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px 0 0 10px; }
+
+.inventary-active-cell.helmet-cell {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2; }
+
+.inventary-active-cell.sword-cell {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3; }
+
+.inventary-active-cell.armor-cell {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3; }
+
+.inventary-active-cell.shield-cell {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3; }
+
+.inventary-active-cell.pants-cell {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4; }
+
+.inventary-active-cell.boots-cell {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5; }
+
+.inventary-passive {
+  height: 50%;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-rows: repeat(5, 20px);
+  grid-template-columns: repeat(10, 20px);
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid black; }
+
+.main-panel {
+  position: absolute;
+  z-index: 800;
+  border: 1px solid black;
+  background-color: #eee;
+  padding: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.main-panel-button {
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
+  background-position: center;
+  cursor: pointer;
+  margin: 0 5px; }
+
+.inventary-button {
+  background-image: url(../images/backpack.png); }
+
+.skills-button {
+  background-image: url(../images/fire-spell-cast.png); }
+
